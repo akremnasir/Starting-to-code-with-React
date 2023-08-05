@@ -1,17 +1,22 @@
 import { Fragment, useState } from "react";
-
-function ListGroup() {
-  // let selectedIndex = 0;
+interface props {
+  items: string[];
+  heading: string;
+  onSelectedItem: (item: string) => void;
+}
+function ListGroup({ items, heading, onSelectedItem }: props) {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const items = ["Addis Abeba", "Adama", "Hawasa", "BaherDar", "Gonder"];
   const modit = items.map((item, index) => (
     <li
       className={
         selectedIndex === index ? "list-group-item active" : "list-group-item"
       }
       key={item}
-      onClick={() => setSelectedIndex(index)}
+      onClick={() => {
+        setSelectedIndex(index);
+        onSelectedItem(item);
+      }}
     >
       {item}
     </li>
@@ -21,6 +26,7 @@ function ListGroup() {
   }
   return (
     <Fragment>
+      <h1>{heading}</h1>
       <ul className="list-group">{modit}</ul>
     </Fragment>
   );
