@@ -1,13 +1,25 @@
-import React from 'react'
-import {ReactNode} from 'react'
+import React from "react";
 interface props {
-    children: ReactNode;
-
+  alert: boolean;
+  closeAlert: ()=> void;
 }
-const Alert = ({children}: props) => {
+const Alert = ({ alert, closeAlert }: props) => {
   return (
-    <div className="alert alert-primary"> {children}</div>
-  )
-}
+    alert == true ? (
+      <div className="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Holy guacamole!</strong> You should check in on some of those
+        fields below.
+        <button
+          type="button"
+          className="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+          onClick={closeAlert}
+        ></button>
+      </div>
+    ) : (''
+    )
+    );
+};
 
-export default Alert
+export default Alert;
